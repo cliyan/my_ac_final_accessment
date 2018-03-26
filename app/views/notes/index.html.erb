@@ -15,11 +15,6 @@
               </td>
             </tr>
           <% end %>
-          <% if note.user != current_user %>
-            <div id="follow_<%= note.user.id %>">
-              <p><%= render partial: 'shared/follow_form', locals: {user: note.user} %></p>
-            </div>
-          <% end %>
         </div>
       </div>
     <% end %>
