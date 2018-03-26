@@ -25,7 +25,8 @@ ActiveRecord::Schema.define(version: 20180326052854) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.text "post", null: false
+    t.string "title", null: false
+    t.text "body", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

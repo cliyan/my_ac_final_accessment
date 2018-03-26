@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def new_like_email(user)
     @email = user.email
-    mail to: user.email, subject: "You have a new follower!"
+    mail to: user.email, subject: "You have a new like!"
   end
 
 end
