@@ -1,1 +1,1 @@
-<p><strong><%= user.followings.count %></strong> following <strong><%= user.followers.count %></strong> followers</p>
+<p><strong><%= link_to user.followings.count, followings_user_path(user) %></strong> following <strong><%= link_to user.followers.count, followers_user_path(user) %></strong> followers</p>

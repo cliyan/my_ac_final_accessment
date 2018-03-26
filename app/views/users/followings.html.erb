@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5><%= @user.name.capitalize %></h5>
+          <h7><%= @user.username %></h7>
+          <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+          <% if @user.notes.count <= 1 %>
+            <div><%= @user.notes.count %> note </div>
+          <% else %>
+            <div><%= @user.notes.count %> notes </div>
+          <% end %>
+          <div id="followers_<%= @user.id %>">
+            <p><%= render partial: 'shared/followers_count', locals: {user: @user} %></p>
+          </div>
+          <% if @user != current_user %>
+            <div id="follow_<%= @user.id %>">
+              <p><%= render partial: 'shared/follow_form', locals: {user: @user} %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-3">
+    <% @users.each do |following| %>
+      <div class="card">
+        <div class="card-body">
+        <small><b><%= following.name %></b><i>@<%= link_to following.username, user_path(following) %></i></small>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
