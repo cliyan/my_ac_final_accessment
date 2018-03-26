@@ -1,1 +1,28 @@
-<h1>Display all users</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5><%= @user.name.capitalize %></h5>
+          <h7><%= @user.username %></h7>
+          <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+        </div>
+      </div>
+   </div>
+    <div class="col-md-3 mt-3">
+    <% @users.each do |user| %>
+      <div class="card">
+        <div class="card-body">
+          <small><b><%= user.name %></b><i> @<%= link_to user.username, user_path(user) %></i></small>
+          <p>Latest Note: <%= user.notes.last.try(:post) %></p>
+        </div>
+      </div>
+    <% end %>
+    </div>
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+</div>

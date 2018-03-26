@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   root to: "notes#index"
 
-  resources :notes
+  resources :notes do
+    resources :likes, only: [:create, :destroy]
+  end
 
   resources :users, only: [:index, :show, :edit, :update] do
     resources :relationships, only: [:create, :destroy]

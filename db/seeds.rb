@@ -1,1 +1,23 @@
 User.create(email: "john@example.com", password: "123123", name: "john", username: "john")
+User.create(email: "jane@example.com", password: "123123", name: "jane", username: "jane")
+User.create(email: "peter@example.com", password: "123123", name: "peter", username: "peter")
+User.create(email: "charles@example.com", password: "123123", name: "charles", username: "charles")
+User.create(email: "mary@example.com", password: "123123", name: "mary", username: "mary")
+User.create(email: "matt@example.com", password: "123123", name: "matt", username: "matt")
+User.create(email: "david@example.com", password: "123123", name: "david", username: "david")
+User.create(email: "bernard@example.com", password: "123123", name: "bernard", username: "bernard")
+User.create(email: "benson@example.com", password: "123123", name: "benson", username: "benson")
+User.create(email: "sam@example.com", password: "123123", name: "sam", username: "sam")
+puts "10 user created!"
+
+Note.create(post: "Go get groceries", user_id: "1")
+Note.create(post: "Order pet's food online", user_id: "2")
+Note.create(post: "Pack for trip", user_id: "3")
+Note.create(post: "Plan itinerary for trip", user_id: "4")
+Note.create(post: "Research", user_id: "5")
+Note.create(post: "Get presents for John", user_id: "6")
+Note.create(post: "Get ingredients for dinner", user_id: "7")
+Note.create(post: "Look for recipes", user_id: "8")
+Note.create(post: "Visit Sam", user_id: "9")
+Note.create(post: "Look for books", user_id: "10")
+puts "10 note created!"

@@ -1,0 +1,6 @@
+<% if note.likes.find_by(user_id: current_user.id)%>
+    <% current_like = note.likes.find_by(user_id: current_user.id)%>
+  <%= link_to 'Unlike', note_like_path(note_id: note.id, id: current_like.id), method: :delete, remote: true %>
+<% else %>
+  <%= link_to 'Like', note_likes_path(note_id: note.id), method: :post, remote: true %>
+<% end %>

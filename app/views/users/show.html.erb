@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5><%= @user.name.capitalize %></h5>
+          <h7><%= @user.username %></h7>
+          <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-3">
+    <% @user_note.each do |note| %>
+      <div class="card">
+        <div class="card-body">
+          <p><%= note.post %></p>
+          <% if @user == current_user %>
+          <tr>
+            <td>
+              <%= link_to 'Edit', edit_note_path(note) %>
+              <%= link_to 'Delete', note_path(note), method: :delete, data: {confirm:"Are you sure"} %>
+            </td>
+          </tr>
+          <% else %>
+          <tr>
+            <td>
+              <div id="likes-button_<%= note.id %>">
+                <%= render "shared/likes_button", note: note %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>

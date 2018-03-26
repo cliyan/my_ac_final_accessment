@@ -1,0 +1,8 @@
+    <%= form_for [@note] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :post, class: "form-control", rows: 5, placeholder: "Insert notes here", maxlength: 500, id: 'textbox'%>
+      </div>
+      <div class="form-group d-flex justify-content-end">
+        <%= f.submit "Save", class: "btn btn-primary", id: "submitButton" %>
+      </div>
+    <% end %>
