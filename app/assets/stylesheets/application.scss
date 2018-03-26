@@ -13,3 +13,21 @@
  */
 
  @import "bootstrap";
+
+ .btn-unfollow:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+span.after{
+  display:none;
+}
+
+.btn-unfollow:hover span.before{
+  display:none;
+}
+
+.btn-unfollow:hover span.after{
+  display:block;
+}

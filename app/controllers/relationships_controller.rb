@@ -2,8 +2,8 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:id])
-    follow = Relationship.new
-    follow.update(follower_id: current_user.id, following_id: @user.id)
+    new_follow = Relationship.new
+    new_follow.update(follower_id: current_user.id, following_id: @user.id)
   end
 
   def destroy
