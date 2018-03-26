@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@notes.com'
+  default from: 'notifications@note.com'
 
   def new_like_email(user)
     @email = user.email
