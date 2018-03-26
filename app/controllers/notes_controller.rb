@@ -1,12 +1,9 @@
 class NotesController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   
   def index
-    @note = Note.new
     @notes = Note.all
-    @user = current_user
-    @user_note = current_user.notes.order("created_at DESC")
   end
 
   def create
@@ -16,11 +13,14 @@ class NotesController < ApplicationController
     else
       flash.now[:alert] = "Note was not saved"
     end
-    redirect_to notes_path
+    redirect_to user_path(current_user)
   end
 
   def show
-    @note = Note.find(params[:id])
+    @note = Note.new
+    @user = current_user
+    @user_note = current_user.notes.order("created_at DESC")
+    @user_following = @user.followings
   end
 
   def edit

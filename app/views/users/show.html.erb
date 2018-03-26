@@ -6,33 +6,56 @@
           <h5><%= @user.name.capitalize %></h5>
           <h7><%= @user.username %></h7>
           <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+          <% if @user.notes.count <= 1 %>
+            <div><%= @user.notes.count %> note </div>
+          <% else %>
+            <div><%= @user.notes.count %> notes </div>
+          <% end %>
+          <div id="followers_<%= @user.id %>">
+            <p><%= render partial: 'shared/followers_count', locals: {user: @user} %></p>
+          </div>
+          <% if @user != current_user %>
+            <div id="follow_<%= @user.id %>">
+              <p><%= render partial: 'shared/follow_form', locals: {user: @user} %></p>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
     <div class="col-md-6 mt-3">
-    <% @user_note.each do |note| %>
-      <div class="card">
-        <div class="card-body">
-          <p><%= note.post %></p>
-          <% if @user == current_user %>
-          <tr>
-            <td>
-              <%= link_to 'Edit', edit_note_path(note) %>
-              <%= link_to 'Delete', note_path(note), method: :delete, data: {confirm:"Are you sure"} %>
-            </td>
-          </tr>
-          <% else %>
-          <tr>
-            <td>
-              <div id="likes-button_<%= note.id %>">
-                <%= render "shared/likes_button", note: note %>
-              </div>
-            </td>
-          </tr>
-          <% end %>
+      <% if @user == current_user %>
+        <%= form_for Note.new do |f| %>
+          <div class="form-group">
+          <%= f.text_area :post, class: 'form-control', rows: 1, placeholder: "Add a new note!", maxlength: 500, id: 'textbox' %>
+          </div>
+          <div class="form-group d-flex justify-content-end">
+            <%= f.submit "Save", class: 'btn btn-primary', id: 'submitButtonId' %>
+          </div>
+        <% end %>
+      <% end %>
+      <% @user_note.each do |note| %>
+        <div class="card">
+          <div class="card-body">
+            <p><%= note.post %></p>
+            <% if @user == current_user %>
+            <tr>
+              <td>
+                <%= link_to 'Edit', edit_note_path(note) %>
+                <%= link_to 'Delete', note_path(note), method: :delete, data: {confirm:"Are you sure"} %>
+              </td>
+            </tr>
+            <% else %>
+            <tr>
+              <td>
+                <div id="likes-button_<%= note.id %>">
+                  <%= render "shared/likes_button", note: note %>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get :followings, :followers
     end
+    root to: "notes#show"
   end
   
 end

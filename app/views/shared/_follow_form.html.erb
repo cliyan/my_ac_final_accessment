@@ -1,0 +1,8 @@
+<% if current_relationship = Relationship.find_by(follower_id: current_user.id, following_id: user.id) %>
+  <%= link_to user_relationship_path(user_id: user.id, id: current_relationship.id), method: :delete, class: 'btn btn-primary btn-unfollow', remote: true do %>
+    <span class="before">Following</span>
+    <span class="after">Unfollow</span>
+  <% end %>
+<% else %>
+  <%= link_to "Follow", user_relationships_path(user), method: :post, class: 'btn btn-outline-primary', remote: true %>
+<% end %>

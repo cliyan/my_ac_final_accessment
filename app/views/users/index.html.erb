@@ -6,6 +6,11 @@
           <h5><%= @user.name.capitalize %></h5>
           <h7><%= @user.username %></h7>
           <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+          <% if @user.notes.count <= 1 %>
+            <div><%= @user.notes.count %> note </div>
+          <% else %>
+            <div><%= @user.notes.count %> notes </div>
+          <% end %>
         </div>
       </div>
    </div>
@@ -15,6 +20,20 @@
         <div class="card-body">
           <small><b><%= user.name %></b><i> @<%= link_to user.username, user_path(user) %></i></small>
           <p>Latest Note: <%= user.notes.last.try(:post) %></p>
+          <% if user != current_user %>
+            <div id="follow_<%= user.id %>">
+              <p><%= render partial: 'shared/follow_form', locals: {user: user} %></p>
+            </div>
+          <% end %>
+          <% @user_following.each do |following| %>
+            <% following.notes.each do |note| %>
+            <div class="card">
+              <div class="card-body">
+                <small><b><%= following.name %></b><i> @<%= link_to following.username, user_path(following) %></i></small>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
     <% end %>

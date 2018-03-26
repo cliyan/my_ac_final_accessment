@@ -15,9 +15,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <li class="nav-item nav-link"><%= link_to 'My Notes', user_path(current_user) %></li>
-          <li class="nav-item nav-link"><%= link_to 'Explore', users_path(@users) %></li>
+        <div class="navbar-nav">          
+          <% if current_user %>
+            <li class="nav-item navbar-nav"><%= link_to 'Home', user_path(current_user), class: 'nav-link' %></li>
+            <li class="nav-item navbar-nav"><%= link_to 'Change password', edit_user_registration_path , class: 'nav-link' %></li>
+            <li class="nav-item navbar-nav"><%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li> 
+          <% else %>
+            <li class="navbar-nav nav-item"><%= link_to 'Register', new_user_registration_path, class: 'nav-link' %></li> 
+            <li class="navbar-nav nav-item"><%= link_to 'Log in', new_user_session_path, class: 'nav-link' %></li>
+          <% end %>
         </div>
       </div>
     </nav>

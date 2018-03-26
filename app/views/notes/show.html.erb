@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h5><%= @user.name.capitalize %></h5>
+          <h7><%= @user.username %></h7>
+          <div>Joined <%= @user.created_at.strftime("%B %Y") %></div>
+          <% if @user.notes.count <= 1 %>
+            <div><%= @user.notes.count %> note </div>
+          <% else %>
+            <div><%= @user.notes.count %> notes </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mt-3">
+    <%= form_for [@note] do |f| %>
+      <div class="form-group">
+        <%= f.text_area :post, class: "form-control", rows: 5, placeholder: "Insert notes here", maxlength: 500, id: 'textbox'%>
+      </div>
+      <div class="form-group d-flex justify-content-end">
+        <%= f.submit "Save", class: "btn btn-primary", id: "submitButton" %>
+      </div>
+    <% end %>
+    <% @user_note.each do |note| %>
+      <div class="card">
+        <div class="card-body">
+          <small><b><%= @user.name %></b> <i>@<%= link_to @user.username, user_path(@user) %></i> - <%= distance_of_time_in_words(note.created_at, Time.now)%> ago</small>
+          <p><%= note.post %></p>
+        </div>
+      </div>
+    <% end %>
+    <% @user_following.each do |following| %>
+      <% following.notes.each do |note| %>
+        <div class="card">
+          <div class="card-body">
+            <small><b><%= following.name %></b><i> @<%= link_to following.username, user_path(following) %></i></small>
+            <tr>
+              <td>
+                <div id="likes-button_<%= note.id %>">
+                  <%= render "shared/likes_button", note: note %>
+                </div>
+              </td>
+            </tr>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+    <div class="col-md-3 mt-3">
+      <div class="card">
+        <div class="card-body">
+        </div>
+      </div>
+    </div>
+</div>
